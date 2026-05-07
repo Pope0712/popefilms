@@ -842,92 +842,94 @@ function App() {
         </section>
       </main>
 
-      {selectedService && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-md"
+     {selectedService && (
+  <div
+    className="fixed inset-0 z-50 overflow-y-auto bg-black/85 p-3 backdrop-blur-md sm:p-4"
+    onClick={() => setSelectedService(null)}
+  >
+    <div
+      className="mx-auto my-4 w-full max-w-6xl overflow-hidden rounded-[2rem] border border-white/10 bg-[#090909] shadow-2xl sm:my-8"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="sticky top-0 z-30 flex items-start justify-between gap-4 border-b border-white/10 bg-[#090909]/95 px-5 py-4 backdrop-blur-xl">
+        <div className="pr-10">
+          <p className="text-xs uppercase tracking-[0.35em] text-[#7b93ff]">
+            Service Detail
+          </p>
+
+          <h3 className="mt-1 text-xl text-white">
+            {selectedService.title}
+          </h3>
+        </div>
+
+        <button
+          type="button"
           onClick={() => setSelectedService(null)}
+          className="shrink-0 rounded-full border border-white/10 bg-black/60 p-3 text-white/80 transition hover:border-white/30 hover:text-white"
+          aria-label="Close service popup"
         >
-          <div
-            className="max-h-[92vh] w-full max-w-6xl overflow-y-auto rounded-[2rem] border border-white/10 bg-[#090909] shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="sticky top-0 z-20 flex items-center justify-between border-b border-white/10 bg-[#090909]/95 px-5 py-4 backdrop-blur-xl">
-              <div>
-                <p className="text-xs uppercase tracking-[0.35em] text-[#7b93ff]">
-                  Service Detail
-                </p>
+          <X size={20} />
+        </button>
+      </div>
 
-                <h3 className="mt-1 text-xl text-white">
-                  {selectedService.title}
-                </h3>
-              </div>
-
-              <button
-                onClick={() => setSelectedService(null)}
-                className="rounded-full border border-white/10 p-2 text-white/70 transition hover:border-white/30 hover:text-white"
-              >
-                <X size={18} />
-              </button>
-            </div>
-
-            <div className="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
-              <div className="bg-black p-4">
-                <div className="overflow-hidden rounded-2xl border border-white/10 bg-black">
-                  <PortfolioVideo
-                    video={{
-                      title: selectedService.title,
-                      src: selectedService.video,
-                    }}
-                    variant="horizontal"
-                  />
-                </div>
-              </div>
-
-              <div className="p-6 md:p-8">
-                <p className="text-sm uppercase tracking-[0.35em] text-white/45">
-                  Best for
-                </p>
-
-                <p className="mt-4 text-base leading-8 text-white/72">
-                  {selectedService.bestFor}
-                </p>
-
-                <div className="mt-7">
-                  <h4 className="text-xs uppercase tracking-[0.35em] text-white/45">
-                    What it includes
-                  </h4>
-
-                  <ul className="mt-3 grid gap-2 text-sm text-white/70 sm:grid-cols-2">
-                    {selectedService.includes.map((item) => (
-                      <li key={item}>• {item}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="mt-7">
-                  <h4 className="text-xs uppercase tracking-[0.35em] text-white/45">
-                    Deliverables
-                  </h4>
-
-                  <ul className="mt-3 space-y-2 text-sm text-white/70">
-                    {selectedService.deliverables.map((item) => (
-                      <li key={item}>• {item}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                <a
-                  href="#contact"
-                  onClick={() => setSelectedService(null)}
-                  className="mt-8 inline-flex rounded-full bg-white px-5 py-3 text-sm text-black transition hover:bg-[#4b6fff] hover:text-white"
-                >
-                  Start a Project
-                </a>
-              </div>
-            </div>
+      <div className="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="bg-black p-4">
+          <div className="overflow-hidden rounded-2xl border border-white/10 bg-black">
+            <PortfolioVideo
+              video={{
+                title: selectedService.title,
+                src: selectedService.video,
+              }}
+              variant="horizontal"
+            />
           </div>
         </div>
-      )}
+
+        <div className="p-6 pb-10 md:p-8">
+          <p className="text-sm uppercase tracking-[0.35em] text-white/45">
+            Best for
+          </p>
+
+          <p className="mt-4 text-base leading-8 text-white/72">
+            {selectedService.bestFor}
+          </p>
+
+          <div className="mt-7">
+            <h4 className="text-xs uppercase tracking-[0.35em] text-white/45">
+              What it includes
+            </h4>
+
+            <ul className="mt-3 grid gap-2 text-sm text-white/70 sm:grid-cols-2">
+              {selectedService.includes.map((item) => (
+                <li key={item}>• {item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="mt-7">
+            <h4 className="text-xs uppercase tracking-[0.35em] text-white/45">
+              Deliverables
+            </h4>
+
+            <ul className="mt-3 space-y-2 text-sm text-white/70">
+              {selectedService.deliverables.map((item) => (
+                <li key={item}>• {item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <a
+            href="#contact"
+            onClick={() => setSelectedService(null)}
+            className="mt-8 inline-flex rounded-full bg-white px-5 py-3 text-sm text-black transition hover:bg-[#4b6fff] hover:text-white"
+          >
+            Start a Project
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
 
       {selectedProject && (
         <div
