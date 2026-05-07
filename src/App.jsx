@@ -4,7 +4,7 @@ import { ArrowRight, Play, X } from 'lucide-react'
 const SITE_PASSWORD = 'popefilms2026'
 
 const localPath = (path) => {
-  return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`
+  return encodeURI(`${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`)
 }
 
 const navItems = ['Home', 'Work', 'Services', 'Process', 'About', 'Contact']
@@ -35,15 +35,15 @@ const projects = [
     videos: [
       {
         title: 'Brand Reel 01',
-        src: '/videos/affidea femei care inspira.mp4',
+        src: 'https://vimeo.com/1189989594?share=copy&fl=sv&fe=ci',
       },
       {
         title: 'Brand Reel 02',
-        src: '/videos/andra cover reveal.mp4',
+        src: 'https://vimeo.com/1189989649?share=copy&fl=sv&fe=ci',
       },
       {
         title: 'Brand Reel 03',
-        src: '/videos/mbm cai.mp4',
+        src: 'https://vimeo.com/1189989791?share=copy&fl=sv&fe=ci',
       },
     ],
   },
@@ -59,15 +59,15 @@ const projects = [
     videos: [
       {
         title: 'Interview 01',
-        src: '/videos/affidea kids.mp4',
+        src: 'https://vimeo.com/1189989626?share=copy&fl=sv&fe=ci',
       },
       {
         title: 'Interview 02',
-        src: '/videos/affidea dr turcu.mp4',
+        src: 'https://vimeo.com/1189989576?share=copy&fl=sv&fe=ci',
       },
       {
         title: 'Interview 03',
-        src: '/videos/patrick.mp4',
+        src: 'https://vimeo.com/1189989810?share=copy&fl=sv&fe=ci',
       },
     ],
   },
@@ -107,11 +107,11 @@ const projects = [
     videos: [
       {
         title: 'Location Film 01',
-        src: '/videos/affidea kids clinica.mp4',
+        src: 'https://vimeo.com/1189989613?share=copy&fl=sv&fe=ci',
       },
       {
         title: 'Location Film 02',
-        src: '/videos/location-2.mp4',
+        src: 'https://vimeo.com/1189994100?share=copy&fl=sv&fe=ci',
       },
       {
         title: 'Location Film 03',
@@ -131,15 +131,15 @@ const projects = [
     videos: [
       {
         title: 'Influencer Activation 01',
-        src: '/videos/cristi affidea rapid.mp4',
+        src: 'https://vimeo.com/1189989702?share=copy&fl=sv&fe=ci',
       },
       {
         title: 'Influencer Activation 02',
-        src: '/videos/anne gerovital.mp4',
+        src: 'https://vimeo.com/1189989669?share=copy&fl=sv&fe=ci',
       },
       {
         title: 'Influencer Activation 03',
-        src: '/videos/mares fresha.mp4',
+        src: 'https://vimeo.com/1189989779?share=copy&fl=sv&fe=ci',
       },
     ],
   },
@@ -155,15 +155,15 @@ const projects = [
     videos: [
       {
         title: 'Event Recap 01',
-        src: '/videos/revelion studio harmony.mp4',
+        src: 'https://vimeo.com/1189989819?share=copy&fl=sv&fe=ci',
       },
       {
         title: 'Event Recap 02',
-        src: '/videos/dj patrick.mp4',
+        src: 'https://vimeo.com/1189989730?share=copy&fl=sv&fe=ci',
       },
       {
         title: 'Event Recap 03',
-        src: '/videos/mares barber camp.mp4',
+        src: 'https://vimeo.com/1189989760?share=copy&fl=sv&fe=ci',
       },
     ],
   },
@@ -503,7 +503,7 @@ function App() {
                   <div className="relative h-[60vh] w-full overflow-hidden md:h-[68vh]">
                     {isHeroPlaying ? (
                       <video
-                        src={localPath('/videos/hero-video.mp4')}
+                        src={localPath('/videos/.mp4')}
                         controls
                         playsInline
                         preload="metadata"
@@ -873,12 +873,12 @@ function App() {
             <div className="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
               <div className="bg-black p-4">
                 <div className="overflow-hidden rounded-2xl border border-white/10 bg-black">
-                  <video
-                    src={localPath(selectedService.video)}
-                    controls
-                    playsInline
-                    preload="metadata"
-                    className="aspect-video w-full bg-black object-contain"
+                  <PortfolioVideo
+                    video={{
+                      title: selectedService.title,
+                      src: selectedService.video,
+                    }}
+                    variant="horizontal"
                   />
                 </div>
               </div>
@@ -964,13 +964,7 @@ function App() {
                     key={video.src}
                     className="overflow-hidden rounded-2xl border border-white/10 bg-black"
                   >
-                    <video
-                      src={localPath(video.src)}
-                      controls
-                      playsInline
-                      preload="metadata"
-                      className="aspect-[9/16] w-full bg-black object-contain"
-                    />
+                    <PortfolioVideo video={video} variant="vertical" />
 
                     <div className="border-t border-white/10 px-3 py-3 text-xs uppercase tracking-[0.25em] text-white/50">
                       {video.title}
@@ -1174,6 +1168,87 @@ function PasswordGate({ onUnlock }) {
         </p>
       </form>
     </div>
+  )
+}
+
+function getEmbedUrl(url) {
+  if (!url) return ''
+
+  try {
+    const parsedUrl = new URL(url)
+    const hostname = parsedUrl.hostname.replace('www.', '')
+    const pathname = parsedUrl.pathname
+
+    if (hostname.includes('youtube.com')) {
+      if (pathname.startsWith('/shorts/')) {
+        const id = pathname.split('/shorts/')[1]?.split('/')[0]
+        return `https://www.youtube.com/embed/${id}`
+      }
+
+      if (parsedUrl.searchParams.get('v')) {
+        return `https://www.youtube.com/embed/${parsedUrl.searchParams.get(
+          'v',
+        )}`
+      }
+
+      if (pathname.startsWith('/embed/')) {
+        return url
+      }
+    }
+
+    if (hostname.includes('youtu.be')) {
+      const id = pathname.replace('/', '')
+      return `https://www.youtube.com/embed/${id}`
+    }
+
+    if (hostname.includes('vimeo.com')) {
+      if (hostname.includes('player.vimeo.com')) {
+        return url
+      }
+
+      const id = pathname.split('/').filter(Boolean)[0]
+      return `https://player.vimeo.com/video/${id}?title=0&byline=0&portrait=0`
+    }
+  } catch {
+    return url
+  }
+
+  return url
+}
+
+function isExternalVideo(url) {
+  if (!url) return false
+
+  return (
+    url.includes('youtube.com') ||
+    url.includes('youtu.be') ||
+    url.includes('vimeo.com')
+  )
+}
+
+function PortfolioVideo({ video, variant = 'vertical' }) {
+  const aspectClass = variant === 'horizontal' ? 'aspect-video' : 'aspect-[9/16]'
+
+  if (isExternalVideo(video.src)) {
+    return (
+      <iframe
+        src={getEmbedUrl(video.src)}
+        title={video.title}
+        className={`${aspectClass} w-full bg-black`}
+        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+        allowFullScreen
+      />
+    )
+  }
+
+  return (
+    <video
+      src={localPath(video.src)}
+      controls
+      playsInline
+      preload="metadata"
+      className={`${aspectClass} w-full bg-black object-contain`}
+    />
   )
 }
 
