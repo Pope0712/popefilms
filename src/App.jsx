@@ -7,31 +7,43 @@ const localPath = (path) => {
   return encodeURI(`${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`)
 }
 
-const navItems = ['Home', 'Work', 'Services', 'Process', 'About', 'Contact']
+const mediaPath = (path) => {
+  if (!path) return ''
+  if (path.startsWith('http')) return path
+  return localPath(path)
+}
+
+const navItems = [
+  { label: 'Acasă', href: '#home' },
+  { label: 'Portofoliu', href: '#work' },
+  { label: 'Servicii', href: '#services' },
+  { label: 'Proces', href: '#process' },
+  { label: 'Despre', href: '#about' },
+  { label: 'Contact', href: '#contact' },
+]
 
 const categories = [
-  'All',
+  'Toate',
   'Reels',
-  'Interviews',
-  'Location Films',
-  'Product Photo & Video',
-  'Influencer Activations',
-  'Events',
+  'Interviuri',
+  'Prezentări de locație',
+  'Foto & Video de produs',
+  'Activări cu influenceri',
+  'Evenimente',
   'Corporate',
-  'Horeca',
+  'HoReCa',
   'Fashion / Beauty',
 ]
 
 const projects = [
   {
-    title: 'Brand Reels',
+    title: 'Reels pentru branduri',
     category: 'Reels',
     description:
-      'Short-form cinematic content designed for Instagram, TikTok and paid social.',
+      'Video-uri scurte, cinematice și dinamice, create pentru Instagram, TikTok, campanii paid social și comunicare de brand.',
     format: '9:16 / 16:9',
-    deliverables: ['Vertical reels', 'Cutdowns', 'Hook variations'],
-    media:
-      'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1400&q=80',
+    deliverables: ['Reels verticale', 'Cutdowns', 'Variante de hook'],
+    media: '/images/brand.png',
     videos: [
       {
         title: 'Brand Reel 01',
@@ -48,121 +60,116 @@ const projects = [
     ],
   },
   {
-    title: 'Interview Series',
-    category: 'Interviews',
+    title: 'Interviuri & testimoniale',
+    category: 'Interviuri',
     description:
-      'Clean frames, clear sound and a professional visual setup for founders, brands and corporate stories.',
+      'Cadre curate, sunet clar și o estetică profesională pentru fondatori, branduri, testimoniale și povești corporate.',
     format: '16:9 / 9:16',
-    deliverables: ['Full interview', 'Short clips', 'Subtitled excerpts'],
-    media:
-      'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=80',
+    deliverables: ['Interviu complet', 'Clipuri scurte', 'Secvențe subtitrate'],
+    media: '/images/interviuri.png',
     videos: [
       {
-        title: 'Interview 01',
+        title: 'Interviu 01',
         src: 'https://vimeo.com/1189989626?share=copy&fl=sv&fe=ci',
       },
       {
-        title: 'Interview 02',
+        title: 'Interviu 02',
         src: 'https://vimeo.com/1189989576?share=copy&fl=sv&fe=ci',
       },
       {
-        title: 'Interview 03',
+        title: 'Interviu 03',
         src: 'https://vimeo.com/1189989810?share=copy&fl=sv&fe=ci',
       },
     ],
   },
   {
-    title: 'Product Film',
-    category: 'Product Photo & Video',
+    title: 'Foto & video de produs',
+    category: 'Foto & Video de produs',
     description:
-      'Detailed close-ups, macro shots, product demonstrations and polished edits for commercial use.',
+      'Vizualuri premium pentru produse: cadre de detaliu, close-up-uri, demonstrații, unboxing, lifestyle și edituri comerciale.',
     format: '9:16 / 16:9',
-    deliverables: ['Hero film', 'Detail shots', 'Stills'],
-    media:
-      'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1400&q=80',
+    deliverables: ['Video principal', 'Cadre de detaliu', 'Fotografii extra'],
+    media: '/images/coming soon.png',
     videos: [
       {
-        title: 'Product Video 01',
+        title: 'Video produs 01',
         src: '/videos/product-1.mp4',
       },
       {
-        title: 'Product Video 02',
+        title: 'Video produs 02',
         src: '/videos/product-2.mp4',
       },
       {
-        title: 'Product Video 03',
+        title: 'Video produs 03',
         src: '/videos/product-3.mp4',
       },
     ],
   },
   {
-    title: 'Location Showcase',
-    category: 'Location Films',
+    title: 'Prezentări de locație',
+    category: 'Prezentări de locație',
     description:
-      'Restaurants, hotels, clinics, salons, showrooms and premium spaces presented with atmosphere and flow.',
+      'Restaurante, hoteluri, clinici, saloane, showroom-uri și spații premium prezentate cinematic, cu atmosferă și ritm.',
     format: '9:16 / 16:9',
-    deliverables: ['Atmosphere edit', 'Walkthrough', 'Photo set'],
-    media:
-      'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1400&q=80',
+    deliverables: ['Video de atmosferă', 'Walkthrough', 'Set foto'],
+    media: '/images/locations.png',
     videos: [
       {
-        title: 'Location Film 01',
+        title: 'Prezentare locație 01',
         src: 'https://vimeo.com/1189989613?share=copy&fl=sv&fe=ci',
       },
       {
-        title: 'Location Film 02',
+        title: 'Prezentare locație 02',
         src: 'https://vimeo.com/1189994100?share=copy&fl=sv&fe=ci',
       },
       {
-        title: 'Location Film 03',
+        title: 'Prezentare locație 03',
         src: '/videos/location-3.mp4',
       },
     ],
   },
   {
-    title: 'Influencer Activation',
-    category: 'Influencer Activations',
+    title: 'Activări cu influenceri',
+    category: 'Activări cu influenceri',
     description:
-      'Campaign content created with influencers and creators, adapted for native social media performance.',
+      'Conținut de campanie realizat cu influenceri și creatori, adaptat pentru social media, brand awareness și reclame.',
     format: 'Vertical / Social',
-    deliverables: ['Creator edits', 'Ad-ready clips', 'Behind the scenes'],
-    media:
-      'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1400&q=80',
+    deliverables: ['Video creator', 'Clipuri pentru ads', 'Behind the scenes'],
+    media: '/images/influencer.png',
     videos: [
       {
-        title: 'Influencer Activation 01',
+        title: 'Activare influencer 01',
         src: 'https://vimeo.com/1189989702?share=copy&fl=sv&fe=ci',
       },
       {
-        title: 'Influencer Activation 02',
+        title: 'Activare influencer 02',
         src: 'https://vimeo.com/1189989669?share=copy&fl=sv&fe=ci',
       },
       {
-        title: 'Influencer Activation 03',
+        title: 'Activare influencer 03',
         src: 'https://vimeo.com/1189989779?share=copy&fl=sv&fe=ci',
       },
     ],
   },
   {
-    title: 'Event Recap',
-    category: 'Events',
+    title: 'Recap eveniment',
+    category: 'Evenimente',
     description:
-      'Dynamic visual stories that capture energy, people, details and key moments.',
+      'Povești vizuale dinamice care surprind energia, oamenii, detaliile și momentele importante ale unui eveniment.',
     format: '9:16 / 16:9',
-    deliverables: ['Recap film', 'Highlights', 'Photo extras'],
-    media:
-      'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1400&q=80',
+    deliverables: ['Film recap', 'Highlights', 'Fotografii extra'],
+    media: '/images/events.png',
     videos: [
       {
-        title: 'Event Recap 01',
+        title: 'Recap eveniment 01',
         src: 'https://vimeo.com/1189989819?share=copy&fl=sv&fe=ci',
       },
       {
-        title: 'Event Recap 02',
+        title: 'Recap eveniment 02',
         src: 'https://vimeo.com/1189989730?share=copy&fl=sv&fe=ci',
       },
       {
-        title: 'Event Recap 03',
+        title: 'Recap eveniment 03',
         src: 'https://vimeo.com/1189989760?share=copy&fl=sv&fe=ci',
       },
     ],
@@ -171,190 +178,190 @@ const projects = [
 
 const services = [
   {
-    title: 'Reels & Short-Form Video',
-    text: 'Dynamic vertical videos optimized for retention, awareness and conversion. Ideal for Instagram, TikTok and ads.',
+    title: 'Reels & video short-form',
+    text: 'Video-uri verticale dinamice, optimizate pentru retenție, awareness și conversie. Ideale pentru Instagram, TikTok și campanii paid social.',
     video: '/videos/service-reels.mp4',
     bestFor:
-      'Instagram, TikTok, paid ads, launches, product awareness and social campaigns.',
+      'Instagram, TikTok, reclame plătite, lansări, awareness de produs și campanii social media.',
     includes: [
-      'Creative direction',
-      'Hook and concept structure',
-      'Vertical filming',
-      'Rhythmic editing',
+      'Direcție creativă',
+      'Structură de hook și concept',
+      'Filmări verticale',
+      'Editare dinamică',
       'Text on screen',
       'Color grading',
       'Sound design',
     ],
     deliverables: [
-      '1–3 vertical reels',
-      '9:16 export',
-      'Caption / CTA direction',
-      '1 revision round',
+      '1–3 reels verticale',
+      'Export 9:16',
+      'Direcție pentru caption / CTA',
+      '1 rundă de revizie',
     ],
   },
   {
-    title: 'Interviews & Testimonials',
-    text: 'Professional interview setups with clean framing, clear audio, subtitles, rhythm and polished editing.',
+    title: 'Interviuri & testimoniale',
+    text: 'Setup-uri profesionale de interviu, cu imagine curată, sunet clar, subtitrări, ritm și editare premium.',
     video: '/videos/service-interviews.mp4',
     bestFor:
-      'Founders, brands, testimonials, podcasts, corporate stories and expert content.',
+      'Fondatori, branduri, testimoniale, podcasturi, povești corporate și conținut educațional.',
     includes: [
-      'Interview structure',
-      'Camera setup',
-      'Clean audio capture',
-      'Lighting setup',
-      'Subtitles',
-      'Editing and pacing',
+      'Structură de interviu',
+      'Setup cameră',
+      'Captare audio clară',
+      'Setup de lumină',
+      'Subtitrări',
+      'Editare și ritm',
       'Color grading',
     ],
     deliverables: [
-      'Full interview edit',
-      'Short excerpts',
-      'Subtitled clips',
-      'Multi-platform versions',
+      'Interviu complet editat',
+      'Fragmente scurte',
+      'Clipuri subtitrate',
+      'Versiuni pentru mai multe platforme',
     ],
   },
   {
-    title: 'Product Photo & Video',
-    text: 'Premium product visuals, detail shots, macro frames, demos, unboxing, lifestyle usage and commercial edits.',
+    title: 'Foto & video de produs',
+    text: 'Vizualuri premium pentru produse: cadre de detaliu, macro, demo, unboxing, lifestyle și edituri comerciale.',
     video: '/videos/service-product.mp4',
     bestFor:
-      'Beauty, fashion, food, tech, e-commerce, lifestyle products and commercial campaigns.',
+      'Beauty, fashion, food, tech, e-commerce, produse lifestyle și campanii comerciale.',
     includes: [
-      'Product shot list',
-      'Detail shots',
-      'Macro / close-up visuals',
-      'Demo or usage scenes',
-      'Lighting setup',
-      'Editing',
-      'Color and sound polish',
+      'Shot list pentru produs',
+      'Cadre de detaliu',
+      'Close-up / macro',
+      'Scene de utilizare',
+      'Setup de lumină',
+      'Editare',
+      'Color & sound polish',
     ],
     deliverables: [
-      'Product video',
-      'Detail clips',
-      'Photo extras',
-      'Vertical and horizontal versions',
+      'Video de produs',
+      'Clipuri de detaliu',
+      'Fotografii extra',
+      'Versiuni verticale și orizontale',
     ],
   },
   {
-    title: 'Location Presentations',
-    text: 'Cinematic videos for restaurants, hotels, clinics, salons, showrooms and commercial spaces.',
+    title: 'Prezentări de locație',
+    text: 'Video-uri cinematice pentru restaurante, hoteluri, clinici, saloane, showroom-uri și spații comerciale.',
     video: '/videos/service-location.mp4',
     bestFor:
-      'Restaurants, cafés, hotels, clinics, salons, showrooms, venues and premium spaces.',
+      'Restaurante, cafenele, hoteluri, clinici, saloane, showroom-uri, venue-uri și spații premium.',
     includes: [
-      'Location walkthrough',
-      'Atmosphere shots',
-      'Details and experience',
-      'Staff / product / service moments',
-      'Cinematic edit',
+      'Walkthrough locație',
+      'Cadre de atmosferă',
+      'Detalii și experiență',
+      'Momente cu staff / produs / serviciu',
+      'Editare cinematică',
       'Color grading',
       'Sound design',
     ],
     deliverables: [
-      'Main location video',
-      'Short social cuts',
-      'Vertical 9:16 version',
-      'Optional photo set',
+      'Video principal de prezentare',
+      'Cut-uri scurte pentru social media',
+      'Versiune verticală 9:16',
+      'Set foto opțional',
     ],
   },
   {
-    title: 'Influencer Activations',
-    text: 'Content production for brand campaigns, creator collaborations and native social media storytelling.',
+    title: 'Activări cu influenceri',
+    text: 'Producție de conținut pentru campanii de brand, colaborări cu creatori și storytelling nativ pentru social media.',
     video: '/videos/service-influencer.mp4',
     bestFor:
-      'Influencer campaigns, creator content, brand activations and social media launches.',
+      'Campanii cu influenceri, creator content, activări de brand și lansări pe social media.',
     includes: [
-      'Brief adaptation',
-      'Creator-focused structure',
-      'Native social style',
-      'Filming with influencer',
-      'Brand-safe editing',
-      'Multiple versions',
-      'Fast delivery',
+      'Adaptare brief',
+      'Structură pentru creator',
+      'Stil nativ social media',
+      'Filmări cu influencerul',
+      'Editare brand-safe',
+      'Multiple versiuni',
+      'Livrare rapidă',
     ],
     deliverables: [
-      'Creator campaign video',
-      'Ad-ready clips',
-      'Story / feed versions',
-      'Optional BTS content',
+      'Video de campanie cu creator',
+      'Clipuri pregătite pentru ads',
+      'Versiuni story / feed',
+      'BTS opțional',
     ],
   },
   {
-    title: 'Photo / Video Sessions',
-    text: 'Creative shoots for personal brands, businesses, lifestyle campaigns, portraits and promotional visuals.',
+    title: 'Ședințe foto / video',
+    text: 'Ședințe creative pentru branduri personale, business-uri, campanii lifestyle, portrete și materiale promoționale.',
     video: '/videos/service-sessions.mp4',
     bestFor:
-      'Personal brands, business owners, campaigns, portraits, lifestyle content and promotional visuals.',
+      'Branduri personale, antreprenori, campanii, portrete, lifestyle content și promovare online.',
     includes: [
-      'Creative direction',
+      'Direcție creativă',
       'Shot list',
-      'Photo and video capture',
-      'Lighting and composition',
-      'Editing',
+      'Foto și video capture',
+      'Lumină și compoziție',
+      'Editare',
       'Color grading',
-      'Final export',
+      'Export final',
     ],
     deliverables: [
-      'Edited photo set',
-      'Short video clips',
-      'Social media versions',
-      'Optional reels',
+      'Set foto editat',
+      'Clipuri video scurte',
+      'Versiuni social media',
+      'Reels opțional',
     ],
   },
   {
-    title: 'Custom Campaigns',
-    text: 'Mixed productions, monthly retainers, bulk reels, event recaps, brand launches and custom content packages.',
+    title: 'Campanii custom',
+    text: 'Producții mixte, abonamente lunare, pachete de reels, recap-uri de eveniment, lansări de brand și campanii complete.',
     video: '/videos/service-custom.mp4',
     bestFor:
-      'Brands that need a custom content package, monthly content, campaign coverage or mixed deliverables.',
+      'Branduri care au nevoie de un pachet personalizat de conținut, producție lunară sau campanii cu livrabile multiple.',
     includes: [
-      'Custom creative direction',
-      'Production planning',
-      'Photo / video capture',
-      'Multiple content formats',
-      'Editing and post-production',
-      'Platform-ready exports',
-      'Revision rounds',
+      'Direcție creativă personalizată',
+      'Planificare producție',
+      'Foto / video capture',
+      'Formate multiple de conținut',
+      'Editare și post-producție',
+      'Exporturi pregătite pentru platforme',
+      'Runde de revizie',
     ],
     deliverables: [
-      'Custom video package',
-      'Bulk reels',
-      'Campaign assets',
-      'Monthly content options',
+      'Pachet video custom',
+      'Reels în volum',
+      'Asset-uri de campanie',
+      'Opțiuni lunare de conținut',
     ],
   },
 ]
 
 const process = [
-  'We define the type of content, the target audience and the result you want to achieve.',
-  'We establish the concept, visual mood, format, location, schedule and production details.',
-  'I handle the filming, visual composition, technical setup and all core production elements.',
-  'You receive a first version based on the agreed direction, rhythm and platform requirements.',
-  'After feedback, I refine the material and deliver the final version ready to post, publish or use in campaigns.',
+  'Stabilim tipul de conținut, publicul țintă și rezultatul pe care vrei să îl obții.',
+  'Construim conceptul, direcția vizuală, formatul, locația, programul și detaliile de producție.',
+  'Ne ocupăm de filmare, compoziție, lumină, setup tehnic și toate elementele de producție.',
+  'Primești o primă variantă editată, construită pe direcția agreată și adaptată platformelor finale.',
+  'După feedback, rafinăm materialul și livrăm versiunea finală pregătită pentru postare, publicare sau campanie.',
 ]
 
 const processTitles = [
-  'Brief & Objective',
-  'Creative Direction',
-  'Production',
-  'Editing & First Version',
-  'Revisions & Final Delivery',
+  'Brief & obiectiv',
+  'Direcție creativă',
+  'Producție',
+  'Editare & prima variantă',
+  'Revizii & livrare finală',
 ]
 
 const deliverables = [
   'Vertical 9:16',
-  'Horizontal 16:9',
-  'Multi-platform versions',
-  'Subtitles',
+  'Orizontal 16:9',
+  'Versiuni multi-platformă',
+  'Subtitrări',
   'Text on screen',
   'Color grading',
   'Sound design',
   'Voice-over',
-  'Photo extras',
-  'Raw footage on request',
-  'Urgent delivery on request',
-  'Monthly retainer available',
+  'Fotografii extra',
+  'Materiale brute la cerere',
+  'Livrare urgentă la cerere',
+  'Abonament lunar disponibil',
 ]
 
 function App() {
@@ -362,14 +369,14 @@ function App() {
     () => localStorage.getItem('popefilms_unlocked') === 'true',
   )
 
-  const [activeCategory, setActiveCategory] = useState('All')
+  const [activeCategory, setActiveCategory] = useState('Toate')
   const [selectedProject, setSelectedProject] = useState(null)
   const [selectedService, setSelectedService] = useState(null)
   const [isHeroPlaying, setIsHeroPlaying] = useState(false)
 
   const filteredProjects = useMemo(
     () =>
-      activeCategory === 'All'
+      activeCategory === 'Toate'
         ? projects
         : projects.filter((p) => p.category === activeCategory),
     [activeCategory],
@@ -400,11 +407,11 @@ function App() {
           <nav className="hidden items-center gap-7 text-xs uppercase tracking-[0.32em] text-white/65 md:flex">
             {navItems.map((item) => (
               <a
-                key={item}
-                href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
+                key={item.label}
+                href={item.href}
                 className="transition hover:text-white"
               >
-                {item}
+                {item.label}
               </a>
             ))}
           </nav>
@@ -413,7 +420,7 @@ function App() {
             href="#contact"
             className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs tracking-[0.28em] text-white transition hover:border-[#4b6fff]/50 hover:bg-[#4b6fff]/10"
           >
-            Book a Shoot
+            Programează o producție
           </a>
         </div>
       </header>
@@ -430,20 +437,21 @@ function App() {
           <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-5 py-10 md:px-8 lg:py-16">
             <div className="mb-8 flex items-center justify-center lg:justify-end">
               <span className="text-[0.65rem] uppercase tracking-[0.5em] text-white/45">
-                Cinematic Photo &amp; Video Production
+                Producție foto-video cinematică
               </span>
             </div>
 
             <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
               <div>
                 <h1 className="max-w-4xl text-5xl font-light leading-[0.95] tracking-[-0.04em] md:text-7xl">
-                  Cinematic Visual Production for Brands, People and Places
+                  Producție foto-video premium pentru branduri, oameni și
+                  locații
                 </h1>
 
                 <p className="mt-6 max-w-2xl text-base leading-8 text-white/68 md:text-lg">
-                  I create polished photo and video content for brands that want
-                  to look premium, feel authentic and communicate clearly across
-                  social media, campaigns and digital platforms.
+                  Creăm conținut foto-video cinematic pentru branduri care vor să
+                  arate premium, să comunice clar și să atragă atenția pe social
+                  media, în campanii și pe platforme digitale.
                 </p>
 
                 <div className="mt-8 flex flex-wrap gap-3">
@@ -451,7 +459,7 @@ function App() {
                     href="#work"
                     className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-medium text-black transition hover:bg-[#4b6fff] hover:text-white"
                   >
-                    View Portfolio
+                    Vezi portofoliul
                     <ArrowRight
                       size={16}
                       className="transition group-hover:translate-x-0.5"
@@ -462,18 +470,18 @@ function App() {
                     href="#contact"
                     className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-3 text-sm text-white/90 transition hover:border-[#4b6fff]/60 hover:bg-white/5"
                   >
-                    Start a Project
+                    Începe un proiect
                   </a>
                 </div>
 
                 <div className="mt-8 flex flex-wrap gap-2 text-[0.65rem] uppercase tracking-[0.32em] text-white/45">
                   {[
                     'Reels',
-                    'Interviews',
-                    'Product Films',
-                    'Location Showcases',
-                    'Influencer Activations',
-                    'Photo & Video Production',
+                    'Interviuri',
+                    'Video de produs',
+                    'Prezentări locații',
+                    'Activări cu influenceri',
+                    'Foto & video comercial',
                   ].map((label) => (
                     <span
                       key={label}
@@ -492,7 +500,7 @@ function App() {
                       type="button"
                       onClick={() => setIsHeroPlaying(true)}
                       className="absolute inset-0 z-20 flex items-center justify-center transition"
-                      aria-label="Play hero video"
+                      aria-label="Pornește video-ul de prezentare"
                     >
                       <span className="flex h-20 w-20 items-center justify-center rounded-full border border-white/20 bg-black/65 text-white shadow-2xl backdrop-blur-sm transition hover:scale-105 hover:border-[#4b6fff]/60 hover:bg-[#4b6fff]/15">
                         <Play fill="currentColor" size={30} />
@@ -503,7 +511,7 @@ function App() {
                   <div className="relative h-[60vh] w-full overflow-hidden md:h-[68vh]">
                     {isHeroPlaying ? (
                       <video
-                        src={localPath('/videos/.mp4')}
+                        src={localPath('/videos/hero-video.mp4')}
                         controls
                         playsInline
                         preload="metadata"
@@ -511,7 +519,7 @@ function App() {
                       />
                     ) : (
                       <>
-                        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center opacity-55 transition duration-700" />
+                        <div className="absolute inset-0 bg-[url('/images/hero.png')] bg-cover bg-center opacity-55 transition duration-700" />
                         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(0,0,0,0.55),rgba(0,0,0,0.15))]" />
                         <div className="pointer-events-none absolute inset-0 hero-flicker opacity-70" />
                       </>
@@ -525,9 +533,9 @@ function App() {
 
         <Section
           id="work"
-          eyebrow="Selected Work"
-          title="Portfolio"
-          intro="Category-based selections with clean project previews and a refined cinematic presentation."
+          eyebrow="Lucrări selectate"
+          title="Portofoliu"
+          intro="O selecție de producții foto-video organizate pe categorii, cu exemple relevante pentru branduri, locații, produse și campanii."
         >
           <div className="category-scroll mb-14 flex gap-3 overflow-x-auto pb-3 md:flex-wrap md:overflow-visible md:pb-0">
             {categories.map((category) => (
@@ -558,9 +566,9 @@ function App() {
 
         <Section
           id="services"
-          eyebrow="Services"
-          title="What I Create"
-          intro="From fast-paced vertical content to polished brand films, every production is built around a clear objective, a strong visual direction and a final result that feels premium without being forced."
+          eyebrow="Servicii"
+          title="Ce putem crea pentru brandul tău"
+          intro="De la reels verticale cu impact rapid până la producții video premium, fiecare proiect este construit în jurul unui obiectiv clar, al unei direcții vizuale puternice și al unui rezultat final care arată profesionist."
         >
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {services.map((service) => (
@@ -574,9 +582,9 @@ function App() {
         </Section>
 
         <Section
-          eyebrow="Trust"
-          title="Selected Brands & Locations"
-          intro="I create content adapted to each brand, location and communication direction — always with a focus on image quality, atmosphere and results that attract attention."
+          eyebrow="Încredere"
+          title="Branduri & locații pentru care am creat conținut"
+          intro="Adaptăm fiecare producție la identitatea brandului, specificul locației și direcția de comunicare — cu accent pe imagine, atmosferă și rezultate care atrag atenția."
         >
           <div className="grid grid-cols-2 items-center gap-10 md:grid-cols-5">
             {[
@@ -611,7 +619,7 @@ function App() {
                 className="flex h-28 items-center justify-center"
               >
                 <img
-                  src={localPath(brand.logo)}
+                  src={mediaPath(brand.logo)}
                   alt={`${brand.name} logo`}
                   style={{ transform: brand.scale }}
                   className="h-16 w-[180px] object-contain opacity-90 transition duration-300 hover:opacity-100"
@@ -623,8 +631,8 @@ function App() {
 
         <Section
           id="process"
-          eyebrow="Process"
-          title="A Clear Process From Idea to Final Delivery"
+          eyebrow="Proces"
+          title="Un proces clar, de la idee la livrare finală"
         >
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
             {process.map((step, index) => (
@@ -651,35 +659,37 @@ function App() {
             <div className="grid items-center gap-12 lg:grid-cols-[1fr_0.7fr]">
               <div>
                 <p className="text-xs uppercase tracking-[0.45em] text-[#7b93ff]">
-                  About
+                  Despre
                 </p>
 
                 <h2 className="mt-4 text-3xl font-light tracking-[-0.04em] md:text-5xl">
-                  Behind the Camera
+                  În spatele camerei
                 </h2>
 
                 <p className="mt-6 max-w-4xl text-base leading-8 text-white/70">
-                  I’m Popescu Vlad, also known as Pope — a filmmaker and visual
-                  creator focused on cinematic, clean and modern content. I
-                  started in the event and wedding industry, where I learned how
-                  to capture natural emotion, real moments and meaningful
-                  details. Today, I bring that same attention to atmosphere and
-                  storytelling into brand reels, product videos, location
-                  showcases, interviews and influencer campaigns.
+                  Sunt Popescu Vlad, cunoscut și ca Pope — filmmaker și creator
+                  vizual specializat în conținut cinematic, curat și modern. Am
+                  început în zona de evenimente și nunți, unde am învățat să
+                  surprind emoția naturală, momentele reale și detaliile care
+                  contează. Astăzi, duc aceeași atenție pentru atmosferă și
+                  storytelling în producții pentru branduri, reels, video-uri de
+                  produs, prezentări de locație, interviuri și campanii cu
+                  influenceri.
                 </p>
 
                 <p className="mt-6 max-w-4xl text-base leading-8 text-white/70">
-                  My approach combines technical structure with creative
-                  instinct. I care about composition, light, sound, rhythm, color
-                  and the small details that make a project feel finished. I
-                  don’t see video as a simple sequence of shots — I see it as a
-                  complete visual experience where image, edit, sound and emotion
-                  need to work together naturally.
+                  Abordarea mea combină structura tehnică cu instinctul creativ.
+                  Mă interesează compoziția, lumina, sunetul, ritmul, culoarea
+                  și detaliile mici care fac un material să pară complet. Nu văd
+                  video-ul ca pe o simplă succesiune de cadre, ci ca pe o
+                  experiență vizuală în care imaginea, editarea, sunetul și
+                  emoția trebuie să funcționeze natural împreună.
                 </p>
 
                 <p className="mt-6 max-w-4xl text-base leading-8 text-white/70">
-                  Clients value my fast execution, clear communication, good
-                  organization, creative ideas and premium visual look.
+                  Clienții apreciază execuția rapidă, comunicarea clară,
+                  organizarea, ideile creative și look-ul premium al materialelor
+                  finale.
                 </p>
               </div>
 
@@ -688,8 +698,8 @@ function App() {
 
                 <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-[0_30px_100px_rgba(0,0,0,0.5)]">
                   <img
-                    src={localPath('/images/about-pope.jpg')}
-                    alt="Popescu Vlad behind the camera"
+                    src={mediaPath('/images/about-pope.jpg')}
+                    alt="Popescu Vlad în spatele camerei"
                     className="h-[520px] w-full object-cover md:h-[560px] lg:h-[520px]"
                   />
 
@@ -700,7 +710,7 @@ function App() {
                       Popescu Vlad / Pope
                     </p>
                     <p className="mt-2 text-lg font-light text-white">
-                      Filmmaker & Visual Creator
+                      Filmmaker & creator vizual
                     </p>
                   </div>
                 </div>
@@ -709,10 +719,10 @@ function App() {
 
             <div className="mt-10 grid gap-4 md:grid-cols-4">
               {[
-                '10+ Years of Filming Experience',
-                '20K–50K Average Reel Views',
-                'Buzău / Bucharest / Travel Available',
-                'One-Off Projects / Retainers / Agency Collaborations',
+                '10+ ani de experiență în filmare',
+                '20K–50K vizualizări medii pe reel',
+                'Buzău / București / deplasări disponibile',
+                'Proiecte punctuale / abonamente / colaborări cu agenții',
               ].map((item) => (
                 <div
                   key={item}
@@ -725,7 +735,10 @@ function App() {
           </div>
         </section>
 
-        <Section eyebrow="Deliverables" title="Built for Every Platform">
+        <Section
+          eyebrow="Livrabile"
+          title="Conținut pregătit pentru fiecare platformă"
+        >
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {deliverables.map((item) => (
               <div
@@ -741,17 +754,18 @@ function App() {
         <section className="border-y border-white/10 bg-black px-5 py-24 md:px-8">
           <div className="mx-auto max-w-6xl text-center">
             <p className="text-xs uppercase tracking-[0.5em] text-[#7b93ff]">
-              Let&apos;s Create
+              Hai să creăm
             </p>
 
             <h2 className="mt-5 text-4xl font-light tracking-[-0.04em] md:text-6xl">
-              Ready to Build Something That Looks Premium?
+              Vrei conținut care arată premium și atrage atenția?
             </h2>
 
             <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-white/68">
-              Tell me what you want to create, what the content is for and when
-              you need it. I’ll help shape the idea into a clear visual
-              direction and a final production that fits your brand.
+              Spune-ne ce vrei să comunici, pentru ce platformă ai nevoie de
+              conținut și când vrei să îl publici. Te ajutăm să transformi ideea
+              într-o direcție vizuală clară și într-o producție finală potrivită
+              brandului tău.
             </p>
 
             <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -759,14 +773,14 @@ function App() {
                 href="#contact"
                 className="rounded-full bg-white px-5 py-3 text-sm text-black transition hover:bg-[#4b6fff] hover:text-white"
               >
-                Start a Project
+                Începe un proiect
               </a>
 
               <a
                 href="#contact"
                 className="rounded-full border border-white/15 px-5 py-3 text-sm text-white/90 transition hover:border-[#4b6fff]/60 hover:bg-white/5"
               >
-                Contact Me
+                Contactează-ne
               </a>
             </div>
           </div>
@@ -780,7 +794,7 @@ function App() {
               </h2>
 
               <div className="mt-8 grid gap-4 md:grid-cols-2">
-                {['Name', 'Email', 'Phone'].map((label) => (
+                {['Nume', 'Email', 'Telefon'].map((label) => (
                   <input
                     key={label}
                     placeholder={label}
@@ -790,14 +804,14 @@ function App() {
 
                 <select className="rounded-2xl border border-white/10 bg-black/40 px-4 py-4 text-sm text-white outline-none md:col-span-2">
                   {[
-                    'Project type',
+                    'Tip proiect',
                     'Reels',
-                    'Interview',
-                    'Product photo/video',
-                    'Location presentation',
-                    'Influencer activation',
-                    'Photo/video session',
-                    'Custom campaign',
+                    'Interviu',
+                    'Foto/video de produs',
+                    'Prezentare locație',
+                    'Activare cu influencer',
+                    'Ședință foto/video',
+                    'Campanie custom',
                   ].map((item) => (
                     <option key={item}>{item}</option>
                   ))}
@@ -805,7 +819,7 @@ function App() {
 
                 <textarea
                   rows="6"
-                  placeholder="Message"
+                  placeholder="Spune-ne pe scurt ce vrei să producem"
                   className="rounded-2xl border border-white/10 bg-black/40 px-4 py-4 text-sm text-white placeholder:text-white/35 outline-none transition focus:border-[#4b6fff]/60 md:col-span-2"
                 />
               </div>
@@ -814,136 +828,136 @@ function App() {
                 className="mt-5 rounded-full bg-white px-5 py-3 text-sm text-black transition hover:bg-[#4b6fff] hover:text-white"
                 type="button"
               >
-                Send Inquiry
+                Trimite cererea
               </button>
             </form>
 
             <div className="space-y-6 rounded-[2rem] border border-white/10 bg-black/40 p-6 md:p-8">
               <div>
                 <p className="text-xs uppercase tracking-[0.4em] text-[#7b93ff]">
-                  Details
+                  Detalii
                 </p>
 
                 <div className="mt-4 space-y-3 text-white/75">
                   <p>Popescu Vlad</p>
-                  <p>Phone: 0745531340</p>
+                  <p>Telefon: 0745531340</p>
                   <p>Email: popescuvlad990@gmail.com</p>
-                  <p>Instagram / TikTok: @framesbypope</p>
-                  <p>Available in Buzău, Bucharest and for travel.</p>
+                  <p>Instagram / TikTok: @popefilms.ro</p>
+                  <p>Disponibil în Buzău, București și pentru deplasări.</p>
                 </div>
               </div>
 
               <div className="border-t border-white/10 pt-6 text-sm text-white/55">
-                PopeFilms — Cinematic Photo &amp; Video Production
-                <br />© 2026 PopeFilms. All rights reserved.
+                PopeFilms — Producție foto-video cinematică
+                <br />© 2026 PopeFilms. Toate drepturile rezervate.
               </div>
             </div>
           </div>
         </section>
       </main>
 
-     {selectedService && (
-  <div
-    className="fixed inset-0 z-50 overflow-y-auto bg-black/85 p-3 backdrop-blur-md sm:p-4"
-    onClick={() => setSelectedService(null)}
-  >
-    <div
-      className="mx-auto my-4 w-full max-w-6xl overflow-hidden rounded-[2rem] border border-white/10 bg-[#090909] shadow-2xl sm:my-8"
-      onClick={(e) => e.stopPropagation()}
-    >
-      <div className="sticky top-0 z-30 flex items-start justify-between gap-4 border-b border-white/10 bg-[#090909]/95 px-5 py-4 backdrop-blur-xl">
-        <div className="pr-10">
-          <p className="text-xs uppercase tracking-[0.35em] text-[#7b93ff]">
-            Service Detail
-          </p>
-
-          <h3 className="mt-1 text-xl text-white">
-            {selectedService.title}
-          </h3>
-        </div>
-
-        <button
-          type="button"
+      {selectedService && (
+        <div
+          className="fixed inset-0 z-50 overflow-y-auto bg-black/85 p-3 backdrop-blur-md sm:p-4"
           onClick={() => setSelectedService(null)}
-          className="shrink-0 rounded-full border border-white/10 bg-black/60 p-3 text-white/80 transition hover:border-white/30 hover:text-white"
-          aria-label="Close service popup"
         >
-          <X size={20} />
-        </button>
-      </div>
-
-      <div className="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="bg-black p-4">
-          <div className="overflow-hidden rounded-2xl border border-white/10 bg-black">
-            <PortfolioVideo
-              video={{
-                title: selectedService.title,
-                src: selectedService.video,
-              }}
-              variant="horizontal"
-            />
-          </div>
-        </div>
-
-        <div className="p-6 pb-10 md:p-8">
-          <p className="text-sm uppercase tracking-[0.35em] text-white/45">
-            Best for
-          </p>
-
-          <p className="mt-4 text-base leading-8 text-white/72">
-            {selectedService.bestFor}
-          </p>
-
-          <div className="mt-7">
-            <h4 className="text-xs uppercase tracking-[0.35em] text-white/45">
-              What it includes
-            </h4>
-
-            <ul className="mt-3 grid gap-2 text-sm text-white/70 sm:grid-cols-2">
-              {selectedService.includes.map((item) => (
-                <li key={item}>• {item}</li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="mt-7">
-            <h4 className="text-xs uppercase tracking-[0.35em] text-white/45">
-              Deliverables
-            </h4>
-
-            <ul className="mt-3 space-y-2 text-sm text-white/70">
-              {selectedService.deliverables.map((item) => (
-                <li key={item}>• {item}</li>
-              ))}
-            </ul>
-          </div>
-
-          <a
-            href="#contact"
-            onClick={() => setSelectedService(null)}
-            className="mt-8 inline-flex rounded-full bg-white px-5 py-3 text-sm text-black transition hover:bg-[#4b6fff] hover:text-white"
+          <div
+            className="mx-auto my-4 w-full max-w-6xl overflow-hidden rounded-[2rem] border border-white/10 bg-[#090909] shadow-2xl sm:my-8"
+            onClick={(e) => e.stopPropagation()}
           >
-            Start a Project
-          </a>
+            <div className="sticky top-0 z-30 flex items-start justify-between gap-4 border-b border-white/10 bg-[#090909]/95 px-5 py-4 backdrop-blur-xl">
+              <div className="pr-10">
+                <p className="text-xs uppercase tracking-[0.35em] text-[#7b93ff]">
+                  Detalii serviciu
+                </p>
+
+                <h3 className="mt-1 text-xl text-white">
+                  {selectedService.title}
+                </h3>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setSelectedService(null)}
+                className="shrink-0 rounded-full border border-white/10 bg-black/60 p-3 text-white/80 transition hover:border-white/30 hover:text-white"
+                aria-label="Închide popup-ul de serviciu"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            <div className="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
+              <div className="bg-black p-4">
+                <div className="overflow-hidden rounded-2xl border border-white/10 bg-black">
+                  <PortfolioVideo
+                    video={{
+                      title: selectedService.title,
+                      src: selectedService.video,
+                    }}
+                    variant="horizontal"
+                  />
+                </div>
+              </div>
+
+              <div className="p-6 pb-10 md:p-8">
+                <p className="text-sm uppercase tracking-[0.35em] text-white/45">
+                  Potrivit pentru
+                </p>
+
+                <p className="mt-4 text-base leading-8 text-white/72">
+                  {selectedService.bestFor}
+                </p>
+
+                <div className="mt-7">
+                  <h4 className="text-xs uppercase tracking-[0.35em] text-white/45">
+                    Ce include
+                  </h4>
+
+                  <ul className="mt-3 grid gap-2 text-sm text-white/70 sm:grid-cols-2">
+                    {selectedService.includes.map((item) => (
+                      <li key={item}>• {item}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="mt-7">
+                  <h4 className="text-xs uppercase tracking-[0.35em] text-white/45">
+                    Livrabile
+                  </h4>
+
+                  <ul className="mt-3 space-y-2 text-sm text-white/70">
+                    {selectedService.deliverables.map((item) => (
+                      <li key={item}>• {item}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <a
+                  href="#contact"
+                  onClick={() => setSelectedService(null)}
+                  className="mt-8 inline-flex rounded-full bg-white px-5 py-3 text-sm text-black transition hover:bg-[#4b6fff] hover:text-white"
+                >
+                  Începe un proiect
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-)}
+      )}
 
       {selectedProject && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-md"
+          className="fixed inset-0 z-50 overflow-y-auto bg-black/85 p-3 backdrop-blur-md sm:p-4"
           onClick={() => setSelectedProject(null)}
         >
           <div
-            className="max-h-[92vh] w-full max-w-6xl overflow-y-auto rounded-[2rem] border border-white/10 bg-[#090909] shadow-2xl"
+            className="mx-auto my-4 w-full max-w-6xl overflow-hidden rounded-[2rem] border border-white/10 bg-[#090909] shadow-2xl sm:my-8"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="sticky top-0 z-20 flex items-center justify-between border-b border-white/10 bg-[#090909]/95 px-5 py-4 backdrop-blur-xl">
-              <div>
+            <div className="sticky top-0 z-30 flex items-start justify-between gap-4 border-b border-white/10 bg-[#090909]/95 px-5 py-4 backdrop-blur-xl">
+              <div className="pr-10">
                 <p className="text-xs uppercase tracking-[0.35em] text-[#7b93ff]">
-                  Project Detail
+                  Detalii proiect
                 </p>
 
                 <h3 className="mt-1 text-xl text-white">
@@ -952,10 +966,12 @@ function App() {
               </div>
 
               <button
+                type="button"
                 onClick={() => setSelectedProject(null)}
-                className="rounded-full border border-white/10 p-2 text-white/70 transition hover:border-white/30 hover:text-white"
+                className="shrink-0 rounded-full border border-white/10 bg-black/60 p-3 text-white/80 transition hover:border-white/30 hover:text-white"
+                aria-label="Închide popup-ul de proiect"
               >
-                <X size={18} />
+                <X size={20} />
               </button>
             </div>
 
@@ -975,7 +991,7 @@ function App() {
                 ))}
               </div>
 
-              <div className="p-6 md:p-8">
+              <div className="p-6 pb-10 md:p-8">
                 <p className="text-sm uppercase tracking-[0.35em] text-white/45">
                   {selectedProject.category}
                 </p>
@@ -986,7 +1002,7 @@ function App() {
 
                 <div className="mt-6">
                   <h4 className="text-xs uppercase tracking-[0.35em] text-white/45">
-                    Deliverables
+                    Livrabile
                   </h4>
 
                   <ul className="mt-3 space-y-2 text-sm text-white/70">
@@ -1005,7 +1021,7 @@ function App() {
                   onClick={() => setSelectedProject(null)}
                   className="mt-8 inline-flex rounded-full bg-white px-5 py-3 text-sm text-black transition hover:bg-[#4b6fff] hover:text-white"
                 >
-                  Contact to Book
+                  Solicită o producție similară
                 </a>
               </div>
             </div>
@@ -1051,7 +1067,7 @@ function ProjectCard({ project, onOpen }) {
     >
       <div className="relative h-80 overflow-hidden">
         <img
-          src={project.media}
+          src={mediaPath(project.media)}
           alt={project.title}
           className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
         />
@@ -1064,7 +1080,7 @@ function ProjectCard({ project, onOpen }) {
 
         <div className="absolute bottom-5 left-5 flex items-center gap-2 rounded-full border border-white/15 bg-black/55 px-3 py-2 text-xs text-white/80 backdrop-blur-sm">
           <Play size={14} fill="currentColor" />
-          View 3 Videos
+          Vezi 3 video-uri
         </div>
       </div>
 
@@ -1078,7 +1094,7 @@ function ProjectCard({ project, onOpen }) {
         </p>
 
         <div className="mt-5 inline-flex items-center gap-2 text-sm text-[#7b93ff]">
-          View Project <ArrowRight size={16} />
+          Vezi proiectul <ArrowRight size={16} />
         </div>
       </div>
     </button>
@@ -1098,7 +1114,7 @@ function ServiceCard({ service, onOpen }) {
         </h3>
 
         <span className="text-xs uppercase tracking-[0.3em] text-white/30 transition group-hover:text-[#7b93ff]">
-          Explore
+          Detalii
         </span>
       </div>
 
@@ -1120,7 +1136,7 @@ function PasswordGate({ onUnlock }) {
       return
     }
 
-    setError('Wrong password. Please try again.')
+    setError('Parolă greșită. Încearcă din nou.')
     setPassword('')
   }
 
@@ -1133,16 +1149,16 @@ function PasswordGate({ onUnlock }) {
         className="relative w-full max-w-md rounded-[2rem] border border-white/10 bg-white/[0.04] p-8 shadow-[0_30px_120px_rgba(0,0,0,0.65)] backdrop-blur-xl"
       >
         <p className="text-xs uppercase tracking-[0.45em] text-[#7b93ff]">
-          Private Portfolio
+          Portofoliu privat
         </p>
 
         <h1 className="mt-4 text-4xl font-light tracking-[-0.04em]">
-          Enter Password
+          Introdu parola
         </h1>
 
         <p className="mt-4 text-sm leading-7 text-white/60">
-          This portfolio is currently private. Enter the access password to view
-          the website.
+          Acest portofoliu este momentan privat. Introdu parola de acces pentru
+          a vedea site-ul.
         </p>
 
         <div className="mt-8">
@@ -1150,7 +1166,7 @@ function PasswordGate({ onUnlock }) {
             type="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-            placeholder="Password"
+            placeholder="Parolă"
             autoFocus
             className="w-full rounded-2xl border border-white/10 bg-black/50 px-5 py-4 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-[#7b93ff]/70"
           />
@@ -1162,7 +1178,7 @@ function PasswordGate({ onUnlock }) {
           type="submit"
           className="mt-6 w-full rounded-full bg-white px-5 py-4 text-sm font-medium text-black transition hover:bg-[#4b6fff] hover:text-white"
         >
-          Unlock Portfolio
+          Deblochează portofoliul
         </button>
 
         <p className="mt-6 text-center text-xs uppercase tracking-[0.3em] text-white/30">
